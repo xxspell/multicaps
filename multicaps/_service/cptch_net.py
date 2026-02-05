@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-azcaptcha.com service
+cptch.net service
 """
 from .base import HTTPService
 from .._transport.http_transport import HTTPRequestJSON  # type: ignore
@@ -13,16 +13,14 @@ __all__ = [
     'ReportGoodRequest', 'ReportBadRequest',
     'ImageCaptchaTaskRequest', 'ImageCaptchaSolutionRequest',
     'RecaptchaV2TaskRequest', 'RecaptchaV2SolutionRequest',
-    'RecaptchaV3TaskRequest', 'RecaptchaV3SolutionRequest',
-    'HCaptchaTaskRequest', 'HCaptchaSolutionRequest',
-    'FunCaptchaTaskRequest', 'FunCaptchaSolutionRequest'
+    'RecaptchaV3TaskRequest', 'RecaptchaV3SolutionRequest'
 ]
 
 
 class Service(HTTPService):
     """ Main service class for 2captcha """
 
-    BASE_URL = 'http://azcaptcha.com'
+    BASE_URL = 'https://cptch.net'
 
     def _post_init(self):
         """ Init settings """
@@ -30,7 +28,7 @@ class Service(HTTPService):
         for captcha_type in self.settings:
             self.settings[captcha_type].polling_interval = 5
             self.settings[captcha_type].solution_timeout = 180
-            if captcha_type in (CaptchaType.RECAPTCHAV2, CaptchaType.HCAPTCHA):
+            if captcha_type in (CaptchaType.RECAPTCHAV2,):
                 self.settings[captcha_type].polling_delay = 20
                 self.settings[captcha_type].solution_timeout = 300
             elif captcha_type in (CaptchaType.RECAPTCHAV3,):
@@ -77,13 +75,11 @@ class Request(HTTPRequestJSON):
                             'ERROR_WRONG_FILE_EXTENSION', 'ERROR_IMAGE_TYPE_NOT_SUPPORTED',
                             'ERROR_UPLOAD', 'ERROR_PAGEURL', 'ERROR_BAD_TOKEN_OR_PAGEURL',
                             'ERROR_GOOGLEKEY', 'ERROR_BAD_PARAMETERS', 'ERROR_TOKEN_EXPIRED',
-                            'ERROR_EMPTY_ACTION'):
+                            'ERROR_EMPTY_ACTION', 'ERROR'):
             raise exceptions.BadInputDataError(error_msg)
         elif error_code in ('ERROR_CAPTCHAIMAGE_BLOCKED', 'ERROR_CAPTCHA_UNSOLVABLE',
                             'ERROR_BAD_DUPLICATES'):
             raise exceptions.UnableToSolveError(error_msg)
-        elif error_code in ('ERROR_BAD_PROXY', 'ERROR_PROXY_CONNECTION_FAILED'):
-            raise exceptions.ProxyError(error_msg)
 
         raise exceptions.ServiceError(error_msg)
 
@@ -102,12 +98,12 @@ class InRequest(Request):
                 data=dict(
                     key=self._service.api_key,
                     json=1,
-                    # soft_id=2738
+                    # soft_id=""
                 )
             )
         )
 
-        # azcaptcha.com doesn't like headers - returns ERROR_UPLOAD
+        # cptch.net doesn't like headers - returns ERROR_UPLOAD
         if 'headers' in request:
             del request['headers']
 
@@ -132,7 +128,7 @@ class ResRequest(Request):
             )
         )
 
-        # azcaptcha.com doesn't like headers - returns ERROR_UPLOAD
+        # cptch.net doesn't like headers - returns ERROR_UPLOAD
         if 'headers' in request:
             del request['headers']
 
@@ -204,31 +200,6 @@ class ReportBadRequest(ResRequest):
 class TaskRequest(InRequest):
     """ Common Task Request class """
 
-    # pylint: disable=arguments-differ,unused-argument
-    def prepare(self, captcha, proxy, user_agent, cookies):
-        request = super().prepare(
-            captcha=captcha,
-            proxy=proxy,
-            user_agent=user_agent,
-            cookies=cookies
-        )
-
-        if proxy:
-            request['data'].update(
-                dict(
-                    proxy=proxy.get_string(),
-                    proxytype=proxy.proxy_type.value.upper()
-                )
-            )
-
-        if cookies:
-            request['data']['cookies'] = ';'.join([f'{k}:{v}' for k, v in cookies.items()])
-
-        if user_agent:
-            request['data']['userAgent'] = user_agent
-
-        return request
-
     def parse_response(self, response) -> dict:
         """ Parse response and return task_id """
 
@@ -245,11 +216,11 @@ class SolutionRequest(ResRequest):
 
     # pylint: disable=arguments-differ
     def prepare(self, task) -> dict:  # type: ignore
-        """ Prepare a request """
+        """ Prepare request """
 
         request = super().prepare(task=task)
         request["params"].update(
-            dict(action="get", id=task.task_id)
+            dict(action="get2", id=task.task_id)
         )
         return request
 
@@ -261,9 +232,12 @@ class SolutionRequest(ResRequest):
         # get solution class
         solution_class = self.source_data['task'].captcha.get_solution_class()
 
+        # get token and captcha cost
+        token, cost = response_data["request"].rsplit('|', maxsplit=1)
+
         return dict(
-            solution=solution_class(response_data.pop("request")),
-            cost=None,
+            solution=solution_class(token),
+            cost=cost,
             extra=response_data
         )
 
@@ -277,9 +251,9 @@ class ImageCaptchaTaskRequest(TaskRequest):
 
         request = super().prepare(
             captcha=captcha,
-            proxy=None,
-            user_agent=None,
-            cookies=None
+            proxy=proxy,
+            user_agent=user_agent,
+            cookies=cookies
         )
 
         # add required params
@@ -337,13 +311,6 @@ class RecaptchaV2TaskRequest(TaskRequest):
             )
         )
 
-        # add optional params
-        request['data'].update(
-            captcha.get_optional_data(
-                data_s=('data-s', None)
-            )
-        )
-
         return request
 
 
@@ -387,69 +354,3 @@ class RecaptchaV3TaskRequest(TaskRequest):
 
 class RecaptchaV3SolutionRequest(SolutionRequest):
     """ reCAPTCHA v3 solution request """
-
-
-class HCaptchaTaskRequest(TaskRequest):
-    """ HCaptcha task request """
-
-    # pylint: disable=arguments-differ,signature-differs
-    def prepare(self, captcha, proxy, user_agent, cookies) -> dict:  # type: ignore
-        """ Prepare request """
-
-        request = super().prepare(
-            captcha=captcha,
-            proxy=proxy,
-            user_agent=user_agent,
-            cookies=cookies
-        )
-
-        request['data'].update(
-            dict(
-                method="hcaptcha",
-                sitekey=captcha.site_key,
-                pageurl=captcha.page_url
-            )
-        )
-
-        return request
-
-
-class HCaptchaSolutionRequest(SolutionRequest):
-    """ HCaptcha solution request """
-
-
-class FunCaptchaTaskRequest(TaskRequest):
-    """ FunCaptcha task request """
-
-    # pylint: disable=arguments-differ,signature-differs
-    def prepare(self, captcha, proxy, user_agent, cookies) -> dict:  # type: ignore
-        """ Prepare request """
-
-        request = super().prepare(
-            captcha=captcha,
-            proxy=proxy,
-            user_agent=user_agent,
-            cookies=cookies
-        )
-
-        request['data'].update(
-            dict(
-                method="funcaptcha",
-                publickey=captcha.public_key,
-                pageurl=captcha.page_url
-            )
-        )
-
-        # add optional params
-        request['data'].update(
-            captcha.get_optional_data(
-                service_url=('surl', None),
-                blob=('data[blob]', None),
-            )
-        )
-
-        return request
-
-
-class FunCaptchaSolutionRequest(SolutionRequest):
-    """ FunCaptcha solution request """

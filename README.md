@@ -2,19 +2,14 @@
   <img src="https://i.imgur.com/8aQf6On.png" />
 </p>
 
-# Unicaps
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/unicaps.png)](https://pypi.python.org/pypi/unicaps/)
-[![PyPI version](https://img.shields.io/pypi/v/unicaps)](https://pypi.python.org/pypi/unicaps/)
-[![PyPI status](https://img.shields.io/pypi/status/unicaps.png)](https://pypi.python.org/pypi/unicaps/)
-[![CodeFactor](https://www.codefactor.io/repository/github/sergey-scat/unicaps/badge)](https://www.codefactor.io/repository/github/sergey-scat/unicaps)
+# Multicaps
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/multicaps.png)](https://pypi.python.org/pypi/multicaps/)
+[![PyPI version](https://img.shields.io/pypi/v/multicaps)](https://pypi.python.org/pypi/multicaps/)
+[![PyPI status](https://img.shields.io/pypi/status/multicaps.png)](https://pypi.python.org/pypi/multicaps/)
 
-Unicaps is a unified Python API for CAPTCHA solving services.
+Fork https://github.com/sergey-scat/unicaps
 
-
-⚠ **PLEASE NOTE**</br>
-⚠ A solving service API key is required to use this package!</br>
-⚠ The list of the supported services you can find in the table below.
-
+Multicaps is a unified Python API for CAPTCHA solving services.
 
 ## Key Features
  - A unified Python interface that is independent of the service used
@@ -25,30 +20,33 @@ Unicaps is a unified Python API for CAPTCHA solving services.
  - Written Pythonic way and is intended for humans
 
 ## Installation
-```pip install -U unicaps```
+```pip install -U multicaps```
 
 ## Simple Usage Example
+
 ```python
->>> from unicaps import CaptchaSolver, CaptchaSolvingService
->>> solver = CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, api_key="<PLACE_YOUR_API_KEY_HERE>")
->>> solver.get_balance()
+>> > from multicaps import CaptchaSolver, CaptchaSolvingService
+>> > solver = CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, api_key="<PLACE_YOUR_API_KEY_HERE>")
+>> > solver.get_balance()
 2.84161
->>> solved = solver.solve_image_captcha(open("captcha.jpg", "rb"), is_phrase=False, is_case_sensitive=True)
->>> solved.solution.text
+>> > solved = solver.solve_image_captcha(open("captcha.jpg", "rb"), is_phrase=False, is_case_sensitive=True)
+>> > solved.solution.text
 'w93Bx'
->>> solved.cost
+>> > solved.cost
 0.00078
->>> solved.report_good()
+>> > solved.report_good()
 True
 ```
 
 ## Asynchronous Example
+
 ```python
 import asyncio
 from pathlib import Path
-from unicaps import AsyncCaptchaSolver, CaptchaSolvingService
+from multicaps import AsyncCaptchaSolver, CaptchaSolvingService
 
 API_KEY = '<PLACE_YOUR_API_KEY_HERE>'
+
 
 async def main():
     async with AsyncCaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, API_KEY) as solver:
@@ -59,6 +57,7 @@ async def main():
         )
         print(f'CAPTCHA text: {solved.solution.text}')
         await solved.report_good()
+
 
 if __name__ == '__main__':
     asyncio.run(main())
@@ -202,7 +201,7 @@ if __name__ == '__main__':
 <summary>Get balance</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # init captcha solver
 with CaptchaSolver(CaptchaSolvingService.ANTI_CAPTCHA, "<PLACE YOUR API KEY HERE>") as solver:
@@ -214,7 +213,7 @@ with CaptchaSolver(CaptchaSolvingService.ANTI_CAPTCHA, "<PLACE YOUR API KEY HERE
 <summary>Get service status (is the service is up?)</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # init captcha solver
 with CaptchaSolver(CaptchaSolvingService.ANTI_CAPTCHA, "<PLACE YOUR API KEY HERE>") as solver:
@@ -227,7 +226,7 @@ with CaptchaSolver(CaptchaSolvingService.ANTI_CAPTCHA, "<PLACE YOUR API KEY HERE
 <summary>Get technical details after solving</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # init captcha solver and solve the captcha
 with CaptchaSolver(CaptchaSolvingService.ANTI_CAPTCHA, "<PLACE YOUR API KEY HERE>") as solver:
@@ -260,8 +259,8 @@ with CaptchaSolver(CaptchaSolvingService.ANTI_CAPTCHA, "<PLACE YOUR API KEY HERE
 ```python
 import pathlib
 
-from unicaps import CaptchaSolver, CaptchaSolvingService
-from unicaps.common import CaptchaCharType, CaptchaAlphabet
+from multicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps.common import CaptchaCharType, CaptchaAlphabet
 
 # image file: it can be a Path, file-object or bytes.
 image_file = pathlib.Path(r'/tmp/captcha.png')
@@ -289,7 +288,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve reCAPTCHA v2</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get page URL and site_key from your page
 page_url = ...
@@ -313,7 +312,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve reCAPTCHA v2 Invisible</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get page url and site_key from your page
 page_url = ...
@@ -338,7 +337,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve reCAPTCHA v2 Enterprise</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get page URL, site_key and data_s from your page
 page_url = ...
@@ -364,7 +363,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve reCAPTCHA v3</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -391,7 +390,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve reCAPTCHA v3 Enterprise</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -419,7 +418,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve hCaptcha</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -431,7 +430,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
     solved = solver.solve_hcaptcha(
         site_key=site_key,
         page_url=page_url,
-        api_domain=<"hcaptcha.com" or "js.hcaptcha.com">  # optional
+        api_domain= < "hcaptcha.com" or "js.hcaptcha.com" >  # optional
     )
     # get response token
     token = solved.solution.token
@@ -442,7 +441,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve hCaptcha Invisible</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -455,7 +454,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
         site_key=site_key,
         page_url=page_url,
         is_invisible=True,
-        api_domain=<"hcaptcha.com" or "js.hcaptcha.com">  # optional
+        api_domain= < "hcaptcha.com" or "js.hcaptcha.com" >  # optional
     )
     # get response token
     token = solved.solution.token
@@ -466,7 +465,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve FunCaptcha</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 public_key = ...
@@ -490,7 +489,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve KeyCaptcha</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -518,7 +517,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve Geetest</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -543,7 +542,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve Geetest v4</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 page_url = ...
@@ -569,7 +568,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve Capy Puzzle</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps import CaptchaSolver, CaptchaSolvingService
 
 # get CAPTCHA params from the target page/site
 site_key = ...
@@ -596,8 +595,8 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Solve a text CAPTCHA</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
-from unicaps.common import CaptchaAlphabet, WorkerLanguage
+from multicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps.common import CaptchaAlphabet, WorkerLanguage
 
 # init captcha solver
 with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>") as solver:
@@ -618,7 +617,7 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Catch exceptions</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService, exceptions
+from multicaps import CaptchaSolver, CaptchaSolvingService, exceptions
 
 # init captcha solver
 with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>") as solver:
@@ -657,8 +656,8 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Create a task and wait for the result</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
-from unicaps.captcha import RecaptchaV2
+from multicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps.captcha import RecaptchaV2
 
 # get page URL and site_key from your page
 page_url = ...
@@ -686,8 +685,8 @@ with CaptchaSolver(CaptchaSolvingService.TWOCAPTCHA, "<PLACE YOUR API KEY HERE>"
 <summary>Add proxy, cookies and User-Agent</summary>
 
 ```python
-from unicaps import CaptchaSolver, CaptchaSolvingService
-from unicaps.proxy import ProxyServer
+from multicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps.proxy import ProxyServer
 
 # get page URL and site_key from your page
 page_url = ...

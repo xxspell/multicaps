@@ -8,7 +8,7 @@ from urllib.parse import urlparse, parse_qs
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://www.capy.me/products/puzzle_captcha/'
 API_KEY = os.getenv('API_KEY_2CAPTCHA', default='<PLACE_YOUR_API_KEY_HERE>')

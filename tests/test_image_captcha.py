@@ -5,8 +5,8 @@ import os.path
 import pathlib
 
 import pytest
-from unicaps.captcha import ImageCaptcha
-from unicaps.exceptions import BadInputDataError
+from multicaps.captcha import ImageCaptcha
+from multicaps.exceptions import BadInputDataError
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 IMAGE_FILE = os.path.join(DATA_DIR, 'image.jpg')

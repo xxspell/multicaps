@@ -11,7 +11,7 @@ from pytest import fixture
 
 cd = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(1, cd)
-from unicaps._captcha import CaptchaType
+from multicaps._captcha import CaptchaType
 
 
 @fixture()
@@ -48,7 +48,7 @@ def _get_random_value(field):
 
 @fixture(scope="module", params=CaptchaType)
 def captcha_class(request):
-    captcha_package = importlib.import_module('unicaps.captcha')
+    captcha_package = importlib.import_module('multicaps.captcha')
     return getattr(captcha_package, request.param.value)
 
 

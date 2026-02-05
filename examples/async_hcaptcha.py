@@ -8,7 +8,7 @@ import os
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://accounts.hcaptcha.com/demo'
 API_KEY = os.getenv('API_KEY_2CAPTCHA', default='<PLACE_YOUR_API_KEY_HERE>')

@@ -3,7 +3,7 @@
 Proxy tests
 """
 
-from unicaps.proxy import ProxyServer, ProxyServerType
+from multicaps.proxy import ProxyServer, ProxyServerType
 
 
 def test_proxy_from_string():

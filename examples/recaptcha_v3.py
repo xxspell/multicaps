@@ -8,7 +8,7 @@ import re
 from pprint import pprint
 
 import httpx
-from unicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://recaptcha-demo.appspot.com/recaptcha-v3-request-scores.php'
 VERIFY_URL = ('https://recaptcha-demo.appspot.com/recaptcha-v3-verify.php'

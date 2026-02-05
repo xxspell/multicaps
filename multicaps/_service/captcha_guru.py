@@ -1,6 +1,8 @@
 """
 cap.guru service
 """
+SOFT_ID = 136024
+
 
 # pylint: disable=unused-import
 from .twocaptcha import (
@@ -47,7 +49,7 @@ def _decorator(cls):
 
                 if 'soft_id' in result['params']:
                     del result['params']['soft_id']
-                    result['params']['softguru'] = '127872'
+                    result['params']['softguru'] = SOFT_ID
 
             return result
 

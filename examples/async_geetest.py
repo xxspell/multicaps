@@ -7,7 +7,7 @@ import os
 import time
 
 import httpx
-from unicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://2captcha.com/demo/geetest'
 INIT_PARAMS_URL = 'https://2captcha.com/api/v1/captcha-demo/gee-test/init-params?t={ms}'

@@ -7,8 +7,8 @@ import logging
 import os
 from importlib import import_module
 
-from unicaps import CaptchaSolver, AsyncCaptchaSolver
-from unicaps.__version__ import __version__
+from multicaps import CaptchaSolver, AsyncCaptchaSolver
+from multicaps.__version__ import __version__
 
 logging.basicConfig(level=logging.INFO)
 

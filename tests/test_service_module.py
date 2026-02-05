@@ -10,8 +10,8 @@ from unittest import mock
 
 import pytest
 
-from unicaps._captcha import CaptchaType
-from unicaps._service import SOLVING_SERVICE
+from multicaps._captcha import CaptchaType
+from multicaps._service import SOLVING_SERVICE
 
 from data.data import (BASE_TASK_REQUEST_DATA, INPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC,
                        OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC,
@@ -49,7 +49,7 @@ REQUEST_PARSE_RESPONSE_PARAMS = ('self', 'response')
 
 @pytest.fixture(scope="module", params=SERVICE_MODULES_FOR_TEST)
 def service_module(request):
-    return importlib.import_module('unicaps._service.' + request.param)
+    return importlib.import_module('multicaps._service.' + request.param)
 
 
 @pytest.fixture(scope="module")

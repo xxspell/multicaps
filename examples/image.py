@@ -7,8 +7,8 @@ import os
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
-from unicaps.common import CaptchaCharType, CaptchaAlphabet  # type: ignore
+from multicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps.common import CaptchaCharType, CaptchaAlphabet  # type: ignore
 
 URL = 'https://democaptcha.com/demo-form-eng/image.html'
 API_KEY = os.getenv('API_KEY_2CAPTCHA', default='<PLACE_YOUR_API_KEY_HERE>')

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
-from unicaps._captcha import CaptchaType
-from unicaps._captcha.base import BaseCaptcha, BaseCaptchaSolution
+from multicaps._captcha import CaptchaType
+from multicaps._captcha.base import BaseCaptcha, BaseCaptchaSolution
 
 
 def test_captcha_class_base(captcha_class):

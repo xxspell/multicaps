@@ -8,7 +8,7 @@ import re
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://client-demo.arkoselabs.com/solo-animals'
 URL_VERIFY = 'https://client-demo.arkoselabs.com/solo-animals/verify'

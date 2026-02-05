@@ -7,7 +7,7 @@ import os
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://recaptcha-demo.appspot.com/recaptcha-v2-invisible.php'
 API_KEY = os.getenv('API_KEY_2CAPTCHA', default='<PLACE_YOUR_API_KEY_HERE>')

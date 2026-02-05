@@ -5,8 +5,8 @@ CaptchaSolver tests
 from unittest.mock import Mock
 
 import pytest
-from unicaps import CaptchaSolver, CaptchaSolvingService
-from unicaps.captcha import CaptchaType
+from multicaps import CaptchaSolver, CaptchaSolvingService
+from multicaps.captcha import CaptchaType
 
 API_KEY = 'TEST_API_KEY'
 

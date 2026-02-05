@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps import AsyncCaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
 
 URL = 'https://2captcha.com/demo/keycaptcha'
 URL_VERIFY = 'https://2captcha.com/api/v1/captcha-demo/key-captcha/verify'

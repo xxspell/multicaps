@@ -10,13 +10,13 @@ import pathlib
 from random import choice
 from unittest import mock
 
-from unicaps import CaptchaSolvingService, exceptions as exc  # type: ignore
-from unicaps.captcha import (  # type: ignore
+from multicaps import CaptchaSolvingService, exceptions as exc  # type: ignore
+from multicaps.captcha import (  # type: ignore
     CaptchaType, ImageCaptcha, RecaptchaV2, RecaptchaV3, FunCaptcha, TextCaptcha,
     KeyCaptcha, GeeTest, GeeTestV4, HCaptcha, CapyPuzzle, TikTokCaptcha
 )
-from unicaps.common import CaptchaAlphabet, CaptchaCharType, WorkerLanguage  # type: ignore
-from unicaps.proxy import ProxyServer  # type: ignore
+from multicaps.common import CaptchaAlphabet, CaptchaCharType, WorkerLanguage  # type: ignore
+from multicaps.proxy import ProxyServer  # type: ignore
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -86,17 +86,23 @@ BASE_TASK_REQUEST_DATA = {
         method='POST',
         url='https://2captcha.com/in.php',
         headers={'Accept': 'application/json'},
-        data=dict(key=API_KEY, json=1, soft_id=2738)
+        data=dict(key=API_KEY, json=1,
+                  soft_id=4745
+                  )
     ),
     CaptchaSolvingService.RUCAPTCHA: dict(
         method='POST',
         url='https://rucaptcha.com/in.php',
         headers={'Accept': 'application/json'},
-        data=dict(key=API_KEY, json=1, soft_id=2738)
+        data=dict(key=API_KEY, json=1,
+                  soft_id=4745
+                  )
     ),
     CaptchaSolvingService.ANTI_CAPTCHA: dict(
         method='POST',
-        json=dict(clientKey=API_KEY, softId=940),
+        json=dict(clientKey=API_KEY,
+                  # softId=
+                  ),
         headers={'Accept': 'application/json'},
         url='https://api.anti-captcha.com/createTask'
     ),
@@ -108,7 +114,9 @@ BASE_TASK_REQUEST_DATA = {
     CaptchaSolvingService.CPTCH_NET: dict(
         method='POST',
         url='https://cptch.net/in.php',
-        data=dict(key=API_KEY, json=1, soft_id="164")
+        data=dict(key=API_KEY, json=1,
+                  # soft_id="164"
+                  )
     ),
     CaptchaSolvingService.DEATHBYCAPTCHA: dict(
         method='POST',

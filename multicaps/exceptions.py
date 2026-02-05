@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-unicaps.exceptions
+multicaps.exceptions
 ~~~~~~~~~~~~~~~~~~~
 
 This module contains the set of Unicaps' exceptions.

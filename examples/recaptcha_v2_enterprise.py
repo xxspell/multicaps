@@ -10,8 +10,8 @@ from urllib.parse import urlparse
 
 import httpx
 from lxml import html  # type: ignore
-from unicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
-from unicaps.proxy import ProxyServer  # type: ignore
+from multicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps.proxy import ProxyServer  # type: ignore
 
 URL = 'https://store.steampowered.com/join'
 URL_REFRESH_CAPTCHA = 'https://store.steampowered.com/join/refreshcaptcha/'

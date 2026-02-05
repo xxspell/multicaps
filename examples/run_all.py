@@ -7,7 +7,7 @@ from importlib import import_module
 import logging
 import os
 
-from unicaps import CaptchaSolver  # type: ignore
+from multicaps import CaptchaSolver  # type: ignore
 
 # services dict: key is a name of CAPTCHA solving service, value is an env variable containing
 # the API key

@@ -11,6 +11,8 @@ from .. import exceptions
 from .._captcha import CaptchaType
 from ..common import WorkerLanguage
 
+SOFT_ID = None
+
 __all__ = [
     'Service', 'GetBalanceRequest', 'GetStatusRequest',
     'ReportGoodRequest', 'ReportBadRequest',
@@ -187,10 +189,13 @@ class TaskRequest(Request):
         )
 
         request.update(dict(url=self._service.BASE_URL + "/createTask"))
-        request["json"].update(
-            dict(task={},
-                 softId=940)
-        )
+
+        data = dict(task={})
+
+        if SOFT_ID is not None:
+            data["softId"] = SOFT_ID
+
+        request["json"].update(data)
 
         # add proxy
         if proxy:

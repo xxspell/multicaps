@@ -4,8 +4,8 @@ TextCaptcha solving example
 
 import os
 
-from unicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
-from unicaps.common import WorkerLanguage  # type: ignore
+from multicaps import CaptchaSolver, CaptchaSolvingService, exceptions  # type: ignore
+from multicaps.common import WorkerLanguage  # type: ignore
 
 API_KEY = os.getenv('API_KEY_2CAPTCHA', default='<PLACE_YOUR_API_KEY_HERE>')
 TEXT_CAPTCHA = 'If tomorrow is Sunday, what day is today?'

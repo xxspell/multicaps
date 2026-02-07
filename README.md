@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/8aQf6On.png" />
+  <img src="https://raw.githubusercontent.com/xxspell/multicaps/refs/heads/main/.github/logo.png" />
 </p>
 
 # Multicaps

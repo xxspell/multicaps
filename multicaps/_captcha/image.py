@@ -4,7 +4,6 @@ Image CAPTCHA
 """
 
 import base64
-import imghdr
 import io
 import pathlib
 from dataclasses import dataclass
@@ -15,6 +14,33 @@ from enforce_typing import enforce_types  # type: ignore
 from .base import BaseCaptcha, BaseCaptchaSolution
 from ..common import CaptchaAlphabet, CaptchaCharType, WorkerLanguage
 from ..exceptions import BadInputDataError
+
+
+def _detect_image_type(image_bytes: bytes) -> Optional[str]:
+    """Detect common image formats from file signatures."""
+
+    if len(image_bytes) < 12:
+        return None
+
+    if image_bytes.startswith(b'\xff\xd8\xff'):
+        return 'jpeg'
+
+    if image_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
+        return 'png'
+
+    if image_bytes.startswith((b'GIF87a', b'GIF89a')):
+        return 'gif'
+
+    if image_bytes.startswith(b'BM'):
+        return 'bmp'
+
+    if image_bytes.startswith((b'II*\x00', b'MM\x00*')):
+        return 'tiff'
+
+    if image_bytes.startswith(b'RIFF') and image_bytes[8:12] == b'WEBP':
+        return 'webp'
+
+    return None
 
 
 @enforce_types
@@ -61,7 +87,7 @@ class ImageCaptcha(BaseCaptcha):
     def get_image_type(self) -> str:
         """ Get type of image file/data """
 
-        image_type = imghdr.what(None, h=self._image_bytes)
+        image_type = _detect_image_type(self._image_bytes)  # type: ignore[arg-type]
 
         if not image_type:
             raise BadInputDataError("Unable to recognize image type!")

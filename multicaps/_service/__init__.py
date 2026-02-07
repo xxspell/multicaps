@@ -6,7 +6,8 @@ Certain services related stuff
 import enum
 # pylint: disable=import-self
 from . import (
-    anti_captcha, azcaptcha, captcha_guru, cptch_net, deathbycaptcha, rucaptcha, twocaptcha
+    anti_captcha, azcaptcha, captcha_guru, cptch_net, deathbycaptcha, multibot, rucaptcha,
+    twocaptcha
 )
 
 
@@ -18,6 +19,7 @@ class CaptchaSolvingService(enum.Enum):
     CAPTCHA_GURU = "cap.guru"
     CPTCH_NET = "cptch.net"
     DEATHBYCAPTCHA = "deathbycaptcha.com"
+    MULTIBOT = "multibot.in"
     RUCAPTCHA = "rucaptcha.com"
     TWOCAPTCHA = "2captcha.com"
 
@@ -29,6 +31,7 @@ SOLVING_SERVICE = {
     CaptchaSolvingService.CAPTCHA_GURU: captcha_guru,
     CaptchaSolvingService.CPTCH_NET: cptch_net,
     CaptchaSolvingService.DEATHBYCAPTCHA: deathbycaptcha,
+    CaptchaSolvingService.MULTIBOT: multibot,
     CaptchaSolvingService.RUCAPTCHA: rucaptcha,
     CaptchaSolvingService.TWOCAPTCHA: twocaptcha
 }

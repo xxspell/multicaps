@@ -90,6 +90,13 @@ BASE_TASK_REQUEST_DATA = {
                   soft_id=4745
                   )
     ),
+    CaptchaSolvingService.MULTIBOT: dict(
+            method='POST',
+            url='https://api.multibot.in/in.php',
+            headers={'Accept': 'application/json'},
+            data=dict(key=API_KEY, json=1,
+                      )
+        ),
     CaptchaSolvingService.RUCAPTCHA: dict(
         method='POST',
         url='https://rucaptcha.com/in.php',
@@ -521,6 +528,9 @@ OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC = {
 OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
     OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
+OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.MULTIBOT] = (
+    OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
 
 
 def get_http_resp_obj(ret_value, status_code=200, reason_phrase='OK', is_success=True,
@@ -619,6 +629,9 @@ INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC = {
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
+INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT] = (
+    INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
 
 OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC = {
     CaptchaSolvingService.TWOCAPTCHA: {
@@ -688,6 +701,9 @@ OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC = {
     }
 }
 OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
+    OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
+OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT] = (
     OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
 
@@ -783,6 +799,9 @@ INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC = {
     }
 }
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.RUCAPTCHA] = (
+    INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
+)
+INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.MULTIBOT] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
 )
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.AZCAPTCHA] = (

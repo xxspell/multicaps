@@ -6,7 +6,7 @@ GeeTest v4 CAPTCHA
 from dataclasses import dataclass
 from typing import Optional
 
-from enforce_typing import enforce_types  # type: ignore
+from .._compat import enforce_types
 
 from .base import BaseCaptcha, BaseCaptchaSolution
 

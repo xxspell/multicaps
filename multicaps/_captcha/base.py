@@ -24,6 +24,7 @@ class CaptchaType(enum.Enum):
     KEYCAPTCHA = "KeyCaptcha"
     CAPY = "CapyPuzzle"
     TIKTOK = "TikTokCaptcha"
+    TURNSTILE = "TurnstileCaptcha"
 
 
 @dataclass

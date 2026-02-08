@@ -14,6 +14,7 @@ from .geetest import GeeTest
 from .geetest_v4 import GeeTestV4
 from .capy import CapyPuzzle
 from .tiktok import TikTokCaptcha
+from .turnstile import TurnstileCaptcha
 from .base import CaptchaType
 
 __all__ = (
@@ -28,5 +29,6 @@ __all__ = (
     'GeeTestV4',
     'CapyPuzzle',
     'TikTokCaptcha',
+    'TurnstileCaptcha',
     'CaptchaType'
 )

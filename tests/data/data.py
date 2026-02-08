@@ -13,7 +13,7 @@ from unittest import mock
 from multicaps import CaptchaSolvingService, exceptions as exc  # type: ignore
 from multicaps.captcha import (  # type: ignore
     CaptchaType, ImageCaptcha, RecaptchaV2, RecaptchaV3, FunCaptcha, TextCaptcha,
-    KeyCaptcha, GeeTest, GeeTestV4, HCaptcha, CapyPuzzle, TikTokCaptcha
+    KeyCaptcha, GeeTest, GeeTestV4, HCaptcha, CapyPuzzle, TikTokCaptcha, TurnstileCaptcha
 )
 from multicaps.common import CaptchaAlphabet, CaptchaCharType, WorkerLanguage  # type: ignore
 from multicaps.proxy import ProxyServer  # type: ignore
@@ -79,6 +79,8 @@ INPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC = {
     40: (RecaptchaV2('test1', 'test2', api_domain='recaptcha.net'), None, None, None),
     41: (RecaptchaV3('test1', 'test2', api_domain='recaptcha.net'), None, None, None),
     42: (FunCaptcha('test1', 'test2', blob='test3'), None, None, None),
+    43: (TurnstileCaptcha('test1', 'test2', action='managed', data='test3', page_data='test4'),
+         PROXY_OBJ, None, None),
 }
 
 BASE_TASK_REQUEST_DATA = {
@@ -91,12 +93,14 @@ BASE_TASK_REQUEST_DATA = {
                   )
     ),
     CaptchaSolvingService.MULTIBOT: dict(
-            method='POST',
-            url='https://api.multibot.in/in.php',
-            headers={'Accept': 'application/json'},
-            data=dict(key=API_KEY, json=1,
-                      )
-        ),
+        method='POST',
+        url='https://api.multibot.in/in.php',
+        headers={'Accept': 'application/json'},
+        files=dict(
+            key=(None, API_KEY),
+            json=(None, "1")
+        )
+    ),
     CaptchaSolvingService.RUCAPTCHA: dict(
         method='POST',
         url='https://rucaptcha.com/in.php',
@@ -528,9 +532,48 @@ OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC = {
 OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
     OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
-OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.MULTIBOT] = (
-    OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
-)
+OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.MULTIBOT] = {
+    12: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'))},
+    13: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'))},
+    14: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'))},
+    15: {'files': dict(method=(None, 'userrecaptcha'), version=(None, 'v3'),
+                       googlekey=(None, 'test1'), pageurl=(None, 'test2'))},
+    16: {'files': dict(method=(None, 'userrecaptcha'), version=(None, 'v3'),
+                       googlekey=(None, 'test1'), pageurl=(None, 'test2'),
+                       action=(None, 'test3'))},
+    17: {'files': dict(method=(None, 'userrecaptcha'), version=(None, 'v3'),
+                       googlekey=(None, 'test1'), pageurl=(None, 'test2'))},
+    27: {'files': dict(method=(None, 'hcaptcha'), sitekey=(None, 'test1'),
+                       pageurl=(None, 'test2'))},
+    30: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'),
+                       proxy=(None, PROXY_ADDRESS.split('://', maxsplit=1)[1]))},
+    31: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'),
+                       proxy=(None, PROXY_ADDRESS.split('://', maxsplit=1)[1]))},
+    32: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'),
+                       proxy=(None, PROXY_ADDRESS.split('://', maxsplit=1)[1]))},
+    33: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'), enterprise=(None, '1'))},
+    34: {'files': dict(method=(None, 'userrecaptcha'), version=(None, 'v3'),
+                       googlekey=(None, 'test1'), pageurl=(None, 'test2'),
+                       enterprise=(None, '1'))},
+    40: {'files': dict(method=(None, 'userrecaptcha'), googlekey=(None, 'test1'),
+                       pageurl=(None, 'test2'))},
+    41: {'files': dict(method=(None, 'userrecaptcha'), version=(None, 'v3'),
+                       googlekey=(None, 'test1'), pageurl=(None, 'test2'))},
+    43: {'files': dict(method=(None, 'turnstile'),
+                       sitekey=(None, 'test1'),
+                       pageurl=(None, 'test2'),
+                       action=(None, 'managed'),
+                       data=(None, 'test3'),
+                       pagedata=(None, 'test4'),
+                       proxy=(None, PROXY_ADDRESS.split('://', maxsplit=1)[1]))},
+}
 
 
 def get_http_resp_obj(ret_value, status_code=200, reason_phrase='OK', is_success=True,
@@ -801,9 +844,17 @@ INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC = {
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.RUCAPTCHA] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
 )
-INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.MULTIBOT] = (
-    INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
-)
+INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.MULTIBOT] = {
+    1: get_http_resp_obj(dict(status=0, request='UNKNOWN_ERROR')),
+    2: get_http_resp_obj(dict(status=0, request='ERROR_WRONG_USER_KEY')),
+    3: get_http_resp_obj(dict(status=0, request='ERROR_ZERO_BALANCE')),
+    4: get_http_resp_obj(dict(status=0, request='ERROR_NO_SLOT_AVAILABLE')),
+    5: get_http_resp_obj(dict(status=0, request='MAX_USER_TURN')),
+    6: get_http_resp_obj(dict(status=0, request='WRONG_CAPTCHA_ID')),
+    7: get_http_resp_obj(dict(status=0, request='ERROR_BAD_DATA')),
+    8: get_http_resp_obj(dict(status=0, request='WRONG_RESULT')),
+    9: get_http_resp_obj(dict(status=0, request='ERROR_BAD_PROXY')),
+}
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.AZCAPTCHA] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
 )

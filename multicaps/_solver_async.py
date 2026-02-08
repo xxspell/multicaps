@@ -7,7 +7,7 @@ from typing import Union
 
 from .captcha import (
     ImageCaptcha, TextCaptcha, RecaptchaV2, RecaptchaV3, HCaptcha, FunCaptcha, KeyCaptcha, GeeTest,
-    GeeTestV4, CapyPuzzle, TikTokCaptcha
+    GeeTestV4, CapyPuzzle, TikTokCaptcha, TurnstileCaptcha
 )
 from ._captcha.base import BaseCaptcha  # type: ignore
 from ._service.base import AsyncSolvedCaptcha, AsyncCaptchaTask
@@ -203,6 +203,21 @@ class AsyncCaptchaSolver(CaptchaSolver):
         :rtype: multicaps.AsyncSolvedCaptcha
         """
         return await self._solve_captcha_async(TikTokCaptcha, page_url, **kwargs)
+
+    async def solve_turnstile(self, site_key: str, page_url: str,  # type: ignore
+                              **kwargs) -> AsyncSolvedCaptcha:
+        r"""Solves Cloudflare Turnstile.
+
+        :param site_key: Turnstile website key.
+        :param page_url: Full URL of the page with CAPTCHA.
+        :param action: (optional) Additional action parameter.
+        :param data: (optional) Additional data parameter.
+        :param page_data: (optional) Additional page data parameter (chlPageData).
+        :param proxy: (optional) Proxy to use while solving the CAPTCHA.
+        :return: :class:`AsyncSolvedCaptcha <AsyncSolvedCaptcha>` object
+        :rtype: multicaps.AsyncSolvedCaptcha
+        """
+        return await self._solve_captcha_async(TurnstileCaptcha, site_key, page_url, **kwargs)
 
     async def create_task(self, captcha: BaseCaptcha) -> AsyncCaptchaTask:  # type: ignore
         """Create task to solve CAPTCHA

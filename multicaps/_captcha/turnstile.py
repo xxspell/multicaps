@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 """
-hCaptcha
+Cloudflare Turnstile
 """
 
 from dataclasses import dataclass
@@ -13,18 +13,19 @@ from .base import BaseCaptcha, BaseCaptchaSolution
 
 @enforce_types
 @dataclass
-class HCaptcha(BaseCaptcha):
-    """ hCaptcha """
+class TurnstileCaptcha(BaseCaptcha):
+    """Cloudflare Turnstile CAPTCHA."""
 
     site_key: str
     page_url: str
-    is_invisible: bool = False
-    api_domain: Optional[str] = None
+    action: Optional[str] = None
+    data: Optional[str] = None
+    page_data: Optional[str] = None
 
 
 @enforce_types
 @dataclass
-class HCaptchaSolution(BaseCaptchaSolution):
-    """ hCaptcha solution """
+class TurnstileCaptchaSolution(BaseCaptchaSolution):
+    """Cloudflare Turnstile solution."""
 
     token: str

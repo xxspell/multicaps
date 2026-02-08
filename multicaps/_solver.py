@@ -8,7 +8,7 @@ from typing import Union
 
 from .captcha import (
     ImageCaptcha, TextCaptcha, RecaptchaV2, RecaptchaV3, HCaptcha, FunCaptcha, KeyCaptcha, GeeTest,
-    GeeTestV4, CapyPuzzle, TikTokCaptcha
+    GeeTestV4, CapyPuzzle, TikTokCaptcha, TurnstileCaptcha
 )
 from ._captcha.base import BaseCaptcha  # type: ignore
 from ._service import CaptchaSolvingService, SOLVING_SERVICE
@@ -219,6 +219,20 @@ class CaptchaSolver:
         :rtype: multicaps.SolvedCaptcha
         """
         return self._solve_captcha(TikTokCaptcha, page_url, **kwargs)
+
+    def solve_turnstile(self, site_key: str, page_url: str, **kwargs) -> SolvedCaptcha:
+        r"""Solves Cloudflare Turnstile.
+
+        :param site_key: Turnstile website key.
+        :param page_url: Full URL of the page with CAPTCHA.
+        :param action: (optional) Additional action parameter.
+        :param data: (optional) Additional data parameter.
+        :param page_data: (optional) Additional page data parameter (chlPageData).
+        :param proxy: (optional) Proxy to use while solving the CAPTCHA.
+        :return: :class:`SolvedCaptcha <SolvedCaptcha>` object
+        :rtype: multicaps.SolvedCaptcha
+        """
+        return self._solve_captcha(TurnstileCaptcha, site_key, page_url, **kwargs)
 
     def create_task(self, captcha: BaseCaptcha) -> CaptchaTask:
         """Create task to solve CAPTCHA

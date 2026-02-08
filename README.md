@@ -3,9 +3,8 @@
 </p>
 
 # Multicaps
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/multicaps.png)](https://pypi.python.org/pypi/multicaps/)
 [![PyPI version](https://img.shields.io/pypi/v/multicaps)](https://pypi.python.org/pypi/multicaps/)
-[![PyPI status](https://img.shields.io/pypi/status/multicaps.png)](https://pypi.python.org/pypi/multicaps/)
+[![PyPI status](https://img.shields.io/pypi/dm/multicaps)](https://pypi.python.org/pypi/multicaps/)
 
 Fork https://github.com/sergey-scat/unicaps
 
@@ -67,18 +66,21 @@ if __name__ == '__main__':
 | CAPTCHA➡ \ Service⬇| Image | Text | [reCAPTCHA v2](https://developers.google.com/recaptcha/docs/display) | [reCAPTCHA v3](https://developers.google.com/recaptcha/docs/v3) | [FunCaptcha](https://funcaptcha.com/fc/api/nojs/?pkey=69A21A01-CC7B-B9C6-0F9A-E7FA06677FFC) | [KeyCAPTCHA](https://www.keycaptcha.com/) | [Geetest](https://www.geetest.com/en/demo) | [Geetest v4](https://www.geetest.com/en/demo) | [hCaptcha](https://www.hcaptcha.com/) | [Capy](https://www.capy.me/)
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ |
 | [azcaptcha.com](https://azcaptcha.com) | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ |
 | [deathbycaptcha.com](https://www.deathbycaptcha.com/) | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | [rucaptcha.com](https://rucaptcha.com?from=9863637) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
+`Turnstile` token solving is currently supported by `multibot.in` in the Python API via
+`solve_turnstile(...)`.
+
 ### Image CAPTCHA
 | Service | Regular | Case Sensitive | Phrase | Numbers only | Letters only | Math | Length | Language | Comment for worker
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Cyrillic/Latin | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Cyrillic/Latin | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Latin | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Latin | ✅ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Latin | ✅ |
@@ -96,7 +98,7 @@ if __name__ == '__main__':
 | Service | Language |
 | ------------- | :---: |
 | [2captcha.com](http://2captcha.com/?from=11109985)	| English, Russian |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | English, Russian |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ❌ |
 | [azcaptcha.com](https://azcaptcha.com/) | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ❌ |
@@ -107,7 +109,7 @@ if __name__ == '__main__':
 | Service | Regular | Invisible | Enterprise | Google service<sup>1</sup> | Proxy<sup>2</sup> | Cookies<sup>3</sup> | User-Agent<sup>4</sup> |
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
@@ -123,7 +125,7 @@ if __name__ == '__main__':
 | Service | Regular | Enterprise | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ❌ | ❌ | ❌ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ❌ | ❌ | ❌ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ❌ | ❌ | ❌ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ❌ | ✅ | ❌ | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ✅ | ❌ | ✅ | ✅ | ✅ |
@@ -134,7 +136,7 @@ if __name__ == '__main__':
 | Service | Regular | Data (BLOB) | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ❌ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ❌ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ✅ | ❌ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ✅ | ✅ | ❌ | ✅ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -145,7 +147,7 @@ if __name__ == '__main__':
 | Service | Regular | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ❌ | ❌ | ❌ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ❌ | ❌ | ❌ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ❌ | ❌ | ❌ | ❌ |
 | [azcaptcha.com](https://azcaptcha.com/) | ❌ | ❌ | ❌ | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ❌ | ❌ | ❌ | ❌ |
@@ -156,7 +158,7 @@ if __name__ == '__main__':
 | Service | Regular | API server | GetLib | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ❌ | ✅ | ❌ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [cap.guru](https://captcha.guru/ru/reg/?ref=136024) | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
@@ -167,7 +169,7 @@ if __name__ == '__main__':
 | Service | Regular | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ❌ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ❌ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ❌ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ❌ | ❌ | ❌ | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ❌ | ❌ | ❌ | ❌ |
@@ -178,7 +180,7 @@ if __name__ == '__main__':
 | Service | Regular | Invisible | Custom Data | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
@@ -189,7 +191,7 @@ if __name__ == '__main__':
 | Service | Regular | API server | Proxy | Cookies | User-Agent |
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ❌ | ❌ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [azcaptcha.com](https://azcaptcha.com/) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -200,7 +202,7 @@ if __name__ == '__main__':
 | Service | HTTP | HTTPS | SOCKS 4 | SOCKS 5 |
 | ------------- | :---: | :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ |
-| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ✅ | ✅ | ✅ |
+| [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ✅ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ✅ | ✅ | ✅ |
 | [cap.guru](https://cap.guru/ru/reg/?ref=136024) | ✅ | ✅ | ✅ | ✅ |

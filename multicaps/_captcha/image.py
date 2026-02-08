@@ -9,7 +9,7 @@ import pathlib
 from dataclasses import dataclass
 from typing import Union, Optional
 
-from enforce_typing import enforce_types  # type: ignore
+from .._compat import enforce_types
 
 from .base import BaseCaptcha, BaseCaptchaSolution
 from ..common import CaptchaAlphabet, CaptchaCharType, WorkerLanguage
@@ -23,6 +23,9 @@ def _detect_image_type(image_bytes: bytes) -> Optional[str]:
         return None
 
     if image_bytes.startswith(b'\xff\xd8\xff'):
+        return 'jpeg'
+    # Backward-compatibility with old imghdr behavior used in tests.
+    if image_bytes[6:10] == b'Exif':
         return 'jpeg'
 
     if image_bytes.startswith(b'\x89PNG\r\n\x1a\n'):

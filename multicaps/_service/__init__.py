@@ -7,7 +7,7 @@ import enum
 # pylint: disable=import-self
 from . import (
     anti_captcha, azcaptcha, captcha_guru, cptch_net, deathbycaptcha, multibot, rucaptcha,
-    twocaptcha
+    sctg, twocaptcha
 )
 
 
@@ -21,6 +21,7 @@ class CaptchaSolvingService(enum.Enum):
     DEATHBYCAPTCHA = "deathbycaptcha.com"
     MULTIBOT = "multibot.in"
     RUCAPTCHA = "rucaptcha.com"
+    SCTG = "sctg.xyz"
     TWOCAPTCHA = "2captcha.com"
 
 
@@ -33,5 +34,6 @@ SOLVING_SERVICE = {
     CaptchaSolvingService.DEATHBYCAPTCHA: deathbycaptcha,
     CaptchaSolvingService.MULTIBOT: multibot,
     CaptchaSolvingService.RUCAPTCHA: rucaptcha,
+    CaptchaSolvingService.SCTG: sctg,
     CaptchaSolvingService.TWOCAPTCHA: twocaptcha
 }

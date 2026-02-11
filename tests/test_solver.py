@@ -7,6 +7,7 @@ from unittest.mock import Mock
 import pytest
 from multicaps import CaptchaSolver, CaptchaSolvingService
 from multicaps.captcha import CaptchaType
+from multicaps._service.sctg import Service as SCTGService
 
 API_KEY = 'TEST_API_KEY'
 
@@ -45,6 +46,22 @@ def test_solver_bad_init():
 def test_solver_bad_init2():
     with pytest.raises(ValueError):
         CaptchaSolver(b'2captcha.com', API_KEY)
+
+
+def test_sctg_softid_auto_append():
+    service = SCTGService(API_KEY)
+    assert service.api_key == API_KEY + '|SOFTID697985346'
+
+
+def test_sctg_softid_not_duplicated():
+    key_with_softid = API_KEY + '|SOFTID697985346'
+    service = SCTGService(key_with_softid)
+    assert service.api_key == key_with_softid
+
+
+def test_sctg_keeps_other_suffixes_and_adds_softid():
+    service = SCTGService(API_KEY + '|offfast|onlyxevil')
+    assert service.api_key == API_KEY + '|offfast|onlyxevil|SOFTID697985346'
 
 
 # @pytest.mark.parametrize("captcha_type", CaptchaType)

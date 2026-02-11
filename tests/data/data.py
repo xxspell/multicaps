@@ -101,6 +101,15 @@ BASE_TASK_REQUEST_DATA = {
             json=(None, "1")
         )
     ),
+    CaptchaSolvingService.SCTG: dict(
+        method='POST',
+        url='http://api.sctg.xyz/in.php',
+        headers={'Accept': 'application/json'},
+        data=dict(
+            key=API_KEY + '|SOFTID697985346',
+            json=1
+        )
+    ),
     CaptchaSolvingService.RUCAPTCHA: dict(
         method='POST',
         url='https://rucaptcha.com/in.php',
@@ -529,6 +538,21 @@ OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC = {
         )},
     }
 }
+OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.SCTG] = dict(
+    OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
+OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.SCTG][43] = {
+    'data': dict(
+        method='turnstile',
+        sitekey='test1',
+        pageurl='test2',
+        action='managed',
+        data='test3',
+        pagedata='test4',
+        proxy=PROXY_ADDRESS.split('://', maxsplit=1)[1],
+        proxytype=PROXY_TYPE
+    )
+}
 OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
     OUTPUT_TEST_DATA_FOR_TASK_PREPARE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
@@ -672,6 +696,9 @@ INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC = {
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
+INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.SCTG] = (
+    INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
@@ -746,8 +773,20 @@ OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC = {
 OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.RUCAPTCHA] = (
     OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
 )
-OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT] = (
+OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.SCTG] = (
     OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
+OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT] = dict(
+    OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.TWOCAPTCHA]
+)
+OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT][2] = (
+    dict(task_id='1234567890', extra={'status': 1})
+)
+OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT][3] = (
+    dict(task_id='1234567890', extra={'status': 1})
+)
+OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC[CaptchaSolvingService.MULTIBOT][8] = (
+    dict(task_id='1234567890', extra={'status': 1})
 )
 
 OUTPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC = {
@@ -842,6 +881,9 @@ INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC = {
     }
 }
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.RUCAPTCHA] = (
+    INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
+)
+INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.SCTG] = (
     INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.TWOCAPTCHA]
 )
 INPUT_TEST_DATA_FOR_TASK_PARSE_RESPONSE_FUNC_WITH_EXC[CaptchaSolvingService.MULTIBOT] = {

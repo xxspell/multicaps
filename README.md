@@ -15,7 +15,7 @@ Multicaps is a unified Python API for CAPTCHA solving services.
  - Uses native service protocol/endpoints (eg, no needs in patching _hosts_ file)
  - Has both synchronous and asynchronous client
  - Supports 10 types of CAPTCHAs
- - Supports 7 CAPTCHA solving services
+ - Supports 8 CAPTCHA solving services
  - Written Pythonic way and is intended for humans
 
 ## Installation
@@ -66,6 +66,7 @@ if __name__ == '__main__':
 | CAPTCHA➡ \ Service⬇| Image | Text | [reCAPTCHA v2](https://developers.google.com/recaptcha/docs/display) | [reCAPTCHA v3](https://developers.google.com/recaptcha/docs/v3) | [FunCaptcha](https://funcaptcha.com/fc/api/nojs/?pkey=69A21A01-CC7B-B9C6-0F9A-E7FA06677FFC) | [KeyCAPTCHA](https://www.keycaptcha.com/) | [Geetest](https://www.geetest.com/en/demo) | [Geetest v4](https://www.geetest.com/en/demo) | [hCaptcha](https://www.hcaptcha.com/) | [Capy](https://www.capy.me/)
 | ------------- | :---: | :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [sctg.xyz](https://t.me/Xevil_check_bot?start=697985346) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ |
 | [azcaptcha.com](https://azcaptcha.com) | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ |
@@ -73,7 +74,7 @@ if __name__ == '__main__':
 | [deathbycaptcha.com](https://www.deathbycaptcha.com/) | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | [rucaptcha.com](https://rucaptcha.com?from=9863637) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-`Turnstile` token solving is currently supported by `multibot.in` in the Python API via
+`Turnstile` token solving is currently supported by `multibot.in` and `sctg.xyz` in the Python API via
 `solve_turnstile(...)`.
 
 ### Image CAPTCHA
@@ -202,6 +203,7 @@ if __name__ == '__main__':
 | Service | HTTP | HTTPS | SOCKS 4 | SOCKS 5 |
 | ------------- | :---: | :---:	| :---:	| :---:	|
 | [2captcha.com](http://2captcha.com/?from=11109985)	| ✅ | ✅ | ✅ | ✅ |
+| [sctg.xyz](https://t.me/Xevil_check_bot?start=697985346) | ✅ | ✅ | ✅ | ✅ |
 | [multibot.in](https://multibot.in/dashboard/signup.php?ref=33514) | ✅ | ❌ | ❌ | ❌ |
 | [anti-captcha.com](https://getcaptchasolution.com/biywwwpewp) | ✅ | ✅ | ✅ | ✅ |
 | [azcaptcha.com](https://azcaptcha.com/) | ✅ | ✅ | ✅ | ✅ |

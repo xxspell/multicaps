@@ -18,7 +18,9 @@ SERVICES = {
     'azcaptcha.com': 'API_KEY_AZCAPTCHA',
     'captcha.guru': 'API_KEY_CAPTCHA_GURU',
     'cptch.net': 'API_KEY_CPTCH_NET',
-    'deathbycaptcha.com': 'API_KEY_DEATHBYCAPTCHA'
+    'deathbycaptcha.com': 'API_KEY_DEATHBYCAPTCHA',
+    'multibot.in': 'API_KEY_MULTIBOT',
+    'sctg.xyz': 'API_KEY_SCTG'
 }
 
 EXAMPLES = [
